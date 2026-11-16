@@ -1,17 +1,52 @@
 # 🚀 GCP E-Commerce Analytics Pipeline & Dashboard
 
-Pipeline de datos End-to-End implementado en Google Cloud Platform (GCP) para el procesamiento, limpieza y visualización analítica de datos de transacciones de comercio electrónico.
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Google Cloud Platform](https://img.shields.io/badge/Google_Cloud-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white)
+![BigQuery](https://img.shields.io/badge/BigQuery-669DF6?style=for-the-badge&logo=google&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-003B57?style=for-the-badge&logo=postgresql&logoColor=white)
 
-## 🏗️ Arquitectura y Tecnologías
-* **Cloud Storage:** Almacenamiento RAW de archivos de origen en formato CSV.
-* **BigQuery (Data Warehouse):** Ingesta de datos masivos y creación de capa limpia mediante Vistas SQL (`vw_ventas_limpias`).
-* **Power BI Desktop:** Modelado de datos y desarrollo de dashboard ejecutivo en Modo Oscuro.
-* **Git & GitHub:** Control de versiones y despliegue del proyecto.
+## 📌 Project Overview
 
-## 📊 Descripción del Pipeline
-1. **Ingesta (RAW):** Carga del dataset original en un bucket de Cloud Storage en la región `southamerica-west1`.
-2. **Procesamiento (SQL):** Ingesta hacia BigQuery en la tabla `ventas` y modelado analítico a través de la vista `vw_ventas_limpias`, filtrando inconsistencias y casteando tipos de datos de forma eficiente.
-3. **Visualización:** Reporte interactivo con KPIs financieros (Ingresos totales, Transacciones) y desglose geográfico/temporal.
+This project builds an end-to-end cloud analytics pipeline implemented on **Google Cloud Platform (GCP)** for ingesting, cleaning, and visualizing e-commerce transaction records.
 
-## 📂 Estructura del Repositorio
-- `GCP_Ecommerce_Analytics.pbix`: Archivo del reporte interactivo en Power BI.
+Using **Google Cloud Storage (GCS)**, **BigQuery**, and **Power BI Desktop**, raw CSV sales logs were transformed into a clean analytical view to deliver an executive dark-mode dashboard tracking revenue, transaction volume, and geographic performance.
+
+## 🛠️ Tech Stack & Architecture
+
+- **Google Cloud Storage (GCS):** Staging layer for raw e-commerce CSV datasets hosted in the `southamerica-west1` region.
+- **Google BigQuery (Data Warehouse):** Large-scale data ingestion into the `ventas` table and SQL transformation via analytical views (`vw_ventas_limpias`).
+- **Power BI Desktop:** Analytical data modeling and interactive dark-mode executive dashboard design.
+
+```text
+[ Raw CSV Files ] ──► [ GCS Bucket (southamerica-west1) ] ──► [ BigQuery SQL View ] ──► [ Power BI Dashboard ]
+```
+
+## 📊 Pipeline & Data Modeling Highlights
+The analytical workflow separates raw storage from business-ready reporting views in BigQuery:
+1. Raw Ingestion: Uploaded raw transactional CSV files to a dedicated Cloud Storage bucket (southamerica-west1).
+2. SQL Transformation Layer: Loaded records into BigQuery (ventas) and created the curated view vw_ventas_limpias to filter data inconsistencies, standardize schema types, and optimize query performance.
+3. Executive Visualization: Connected BigQuery to Power BI to monitor financial KPIs (Total Revenue, Transaction Volume) alongside regional and time-series breakdowns.
+
+```sql
+-- Example: Curated analytical view in BigQuery
+CREATE OR REPLACE VIEW `ecommerce_dw.vw_ventas_limpias` AS
+SELECT
+    transaction_id,
+    CAST(transaction_date AS DATE) AS fecha_venta,
+    country,
+    product_category,
+    SAFE_CAST(revenue AS FLOAT64) AS monto_ingreso
+FROM `ecommerce_dw.ventas`
+WHERE revenue > 0 AND transaction_id IS NOT NULL;
+```
+
+## 💡 Key Business & Technical Insights
+1. Cloud-to-BI Decoupling: Centralizing data cleansing in BigQuery (vw_ventas_limpias) eliminated heavy local transformations in Power Query and ensured consistent metric definitions.
+2. Financial & Geographic Visibility: Enabled instant tracking of top-performing regions, seasonal revenue trends, and transaction distribution through interactive filtering.
+3. Executive Dark-Mode Storytelling: Designed a high-contrast visual layout tailored for rapid executive review of core commercial KPIs.
+
+## 📁 Repository Structure
+```text
+├── GCP_Ecommerce_Analytics.pbix   # Interactive Power BI report file
+└── README.md                      # Pipeline architecture and project documentation
+```
