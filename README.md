@@ -11,6 +11,10 @@ This project builds an end-to-end cloud analytics pipeline implemented on **Goog
 
 Using **Google Cloud Storage (GCS)**, **BigQuery**, and **Power BI Desktop**, raw CSV sales logs were transformed into a clean analytical view to deliver an executive dark-mode dashboard tracking revenue, transaction volume, and geographic performance.
 
+## 🖼️ Dashboard Preview
+
+<img width="1058" height="594" alt="dashboard_preview (2)" src="https://github.com/user-attachments/assets/fb5d1e07-3502-487e-bc89-1bf81c9b6ff3" />
+
 ## 🛠️ Tech Stack & Architecture
 
 - **Google Cloud Storage (GCS):** Staging layer for raw e-commerce CSV datasets hosted in the `southamerica-west1` region.
