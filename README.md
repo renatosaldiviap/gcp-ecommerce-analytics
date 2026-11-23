@@ -5,6 +5,9 @@
 ![BigQuery](https://img.shields.io/badge/BigQuery-669DF6?style=for-the-badge&logo=google&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-003B57?style=for-the-badge&logo=postgresql&logoColor=white)
 
+> 🤖 **Deploy Automatically with AI Agents:** Want to deploy this entire GCS + BigQuery pipeline into your own Google Cloud project in one command using **Claude Code, Cursor, Codex CLI, or Gemini CLI**?  
+> 👉 **[Get the ready-to-run AI Agent Skill on Agensi.io](https://www.agensi.io/skills/gcp-e-commerce-analytics-pipeline-bigquery-gcs)** (includes automated `deploy_pipeline.sh`, parameterized regions, international `vw_clean_sales` & `vw_kpi_summary` SQL views, and sample USD datasets).
+
 ## 📌 Project Overview
 
 This project builds an end-to-end cloud analytics pipeline implemented on **Google Cloud Platform (GCP)** for ingesting, cleaning, and visualizing e-commerce transaction records.
